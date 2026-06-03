@@ -4,7 +4,7 @@ const intialValue = {
 };
 
 
-export const useReducer = (state = intialValue, action) => {
+const useReducer = (state = intialValue, action) => {
     switch (action.type) {
         case "INCREMENT":
             return {
@@ -20,3 +20,7 @@ export const useReducer = (state = intialValue, action) => {
 
     }
 }
+export  default useReducer;
+
+
+
