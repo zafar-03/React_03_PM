@@ -17,7 +17,8 @@ const useReducer = (state = intialValue, action) => {
                 ...state,
                 count: state.count - 1
             };
-
+        default :
+            return state;
     }
 }
 export  default useReducer;
