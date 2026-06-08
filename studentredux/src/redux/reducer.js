@@ -9,9 +9,18 @@ const createReducer = (state=initialValue,action)=>{
                 students : [...state.students,action.payload]
             };
         case "delete_student": 
-            return ["Temp"];
+            return {
+                students : state.students.filter((student)=>{
+                   return student.id != action.payload 
+                })
+            };
         case "update_student": 
-            return ["Temp"];
+        var newcourse = "App";
+            return {
+                students : state.students.map((student)=>{
+                   return (student.id == action.payload.id) ? {...student,course : newcourse} : student;
+                })
+            }
         default : 
         return state;
     }

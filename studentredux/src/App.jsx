@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import './App.css'
 import {useSelector,useDispatch} from 'react-redux'
-import { addstudent } from './redux/actions';
+import { addstudent,deletestudent,updatestudent } from './redux/actions';
 
 function App() {
   const [fname, setFname] = useState('');
@@ -45,7 +45,8 @@ function App() {
               <h1>Firstname : {student.fname}</h1>
               <h2>Course Name : {student.course}</h2>
               <h2>RollNo : {student.id}</h2>
-              <button>Delete</button>
+              <button onClick={()=>{dispatch(deletestudent(student.id))}}>Delete</button>
+              <button onClick={()=>{dispatch(updatestudent(student))}}>Update</button>
               <hr />
             </section>
           )
