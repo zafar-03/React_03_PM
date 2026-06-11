@@ -1,0 +1,24 @@
+{
+  "students": [
+    {
+      "fname": "Sumit",
+      "email": "sumit@gmail.com",
+      "course": "Web-Developer",
+      "id": "EtBldDOnCGM"
+    },
+    {
+      "fname": "Rushil",
+      "email": "rushil@gmail.com",
+      "course": "Backend-Developer",
+      "id": "RWDerR2QxSU"
+    }
+  ],
+  "employees": [
+    {
+      "id": "1001",
+      "emp_name": "Rajveer",
+      "position": "Software Developer"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
