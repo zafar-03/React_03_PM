@@ -1,24 +1,23 @@
+import { useState } from 'react'
 import { db } from '../firebase.js'
 
 import './App.css'
 function App() {
-  // let flag = false;
-  // const handleClick =()=>{
-  //  document.querySelector('.students').classList.toggle('hidden');
-  //  if(flag==false){
-  //     flag = true;
-  //  }else{
-  //   flag = false;
-  //  }
+    const [id,setId] = useState("");
+    const [fname,setFname] = useState("");
+    const [std,setStd] = useState("");
 
-  //  console.log(flag);
-  // };
+
+  let flag = false;
+  const handleClick =()=>{
+   document.querySelector('.students').classList.toggle('hidden');
+  };
   
   const handleAdd = ()=>{
     const st1 = {
-      "id" : 203,
-      "fname" : "Rajveer",
-      "std" : 4
+      "id" : id,
+      "fname" : fname,
+      "std" : std
     }
 
     var dbdata =  db.student.some((s)=>{
@@ -30,15 +29,56 @@ function App() {
       db.student.push(st1);
     }
     console.log(db);
-  }
+    setId("");
+    setFname("");
+    setStd("");
+  };
+
+  const handleUpdate = ()=>{
+    const st1 = {
+      "id" : Number(prompt("Enter Id : ")),
+      "fname" : prompt("Enter name : "),
+      "std" : Number(prompt("Enter STD : "))
+    }
+    
+    db.student = db.student.map((s)=>{
+      return (st1.id == s.id) ? st1 : s;
+    })
+    console.log(db.student);
+  };
+
+  const handleDelete = ()=>{
+    var sid = Number(prompt("Enter ID :"));
+    db.student = db.student.filter((s)=>{
+      return sid != s.id;
+    })
+    console.log(db.student);
+  };
 
   return (
     <>
       <h1> Firebase </h1>
-      <button onClick={handleAdd}>Click</button>
+       <div>
+        <button onClick={handleDelete}>Delete</button>
+      </div>
+      <div>
+        <button onClick={handleUpdate}>Update</button>
+      </div>
 
-      {/* <button onClick={handleClick}>
-       {  (flag) ? "Show Table" : "Hide Table" }
+
+      <div>
+          <input type="text" value={id} placeholder='Enter Your Id' name='id' onChange={(e)=>{setId(Number(e.target.value))}}/>
+          <br />
+          <input type="text" value={fname} placeholder='Enter Your Firstname' name='fname'  onChange={(e)=>{setFname(e.target.value)}}/>
+          <br />
+          <input type="text" value={std} placeholder='Enter Your Std' name='std'  onChange={(e)=>{setStd(Number(e.target.value))}}/>
+          <br />
+      <button onClick={handleAdd}>Click</button>
+      </div>
+
+
+      <button onClick={handleClick}>
+       "Click"
       </button>
       <div className="students">
         <h2>Students</h2>
@@ -64,7 +104,7 @@ function App() {
             }
           </tbody>
         </table>
-      </div> */}
+      </div>
     </>
   )
 }
